@@ -5,7 +5,6 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>FOR HR</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
@@ -72,7 +71,7 @@
             <header class="flex justify-center p-2 bg-blue-500">
                 <h1 class="text-lg">
                     Welcome to my
-                    <span class="font-bold"> AI Powered Resume </span>
+                    <span class="font-bold"> SIMPLE AI Powered Resume </span>
                     with PHP
 
                     <br />
@@ -83,25 +82,30 @@
             </header>
 
             <div class="border px-5 py-2">
-                <h2 class="text-lg">Suggested question:</h2>
-                <p class="text-sm pl-5">
-                    What is your main skills
-                    <br />
-                    List down your work experience
-                </p>
+                <h2 class="text-lg">Suggested question (Click the button to use):</h2>
+
+                <div class="flex flex-col w-[80%] max-w-[300px]">
+                    <button id="q1" class="hover:bg-blue-600 bg-blue-500 border p-1 rounded shadow ">What is your main skills</button>
+                    <button id="q2" class="mt-3 hover:bg-blue-600 bg-blue-500 border p-1 rounded shadow">List down your work experience</button>
+                </div>
             </div>
 
             <form onsubmit="<?php $_SERVER['PHP_SELF'] ?>" method="get" class="w-11/12 mx-auto flex flex-col">
                 <label>Your Question to me?</label>
-                <input type="text" name="question" class="border p-2 bg-gray-200 my-2"/>
-                <button type="submit" class="bg-blue-500 border p-1 rounded" >Submit</button>
+                <input id="question" type="text" name="question" class="border p-2 bg-gray-200 my-2"/>
+                <button type="submit" class="hover:bg-blue-600 bg-blue-500 border p-1 rounded shadow " >Submit</button>
             </form>
             </div>
         
         <div class="border px-5 py-2 my-2 h-full">
+            <h1 class="text-lg">Your Question</h1>
+            <p class="mb-5 ml-5">
+                <?php echo $_GET['question'] ?>
+            </p>
+
             <h1 class="text-lg">AI Response</h1>
 
-            <p>
+            <p class="ml-5">
             <?php 
                 if (isset($_GET['question'])) {
                     require_once __DIR__ . '/vendor/autoload.php';
@@ -133,5 +137,14 @@
     </div>
 </body>
     
-</body>
+<script>
+    document.getElementById('q1').addEventListener('click', function() {
+        document.getElementById('question').value = 'What is your main skills';
+    });
+
+    document.getElementById('q2').addEventListener('click', function() {
+        document.getElementById('question').value = 'List down your work experience';
+    });
+</script>
+
 </html>
